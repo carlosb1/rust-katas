@@ -1,0 +1,8 @@
+[package]
+name="kata-yahtzee"
+version = "0.0.1"
+author = ["carlosb"]
+
+[[bin]]
+name="unit_test"
+
