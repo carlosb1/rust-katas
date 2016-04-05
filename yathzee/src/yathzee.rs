@@ -4,6 +4,7 @@
     
     impl Yathzee {
          pub fn play(input_stream: Stream, output_stream: Stream) {
+             
             }
     }
 
