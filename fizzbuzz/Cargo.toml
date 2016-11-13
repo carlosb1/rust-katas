@@ -1,0 +1,9 @@
+[package]
+name = "fizzbuzz"
+version = "0.1.0"
+authors = ["Carlos B <carlos.baezruiz@gmail.com>"]
+
+[[bin]]
+name="fizzbuzz"
+
+[dependencies]

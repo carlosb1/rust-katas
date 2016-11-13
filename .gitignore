@@ -2,7 +2,7 @@
 *.o
 *.so
 *.rlib
-*.dll
+*/*/.*swp
 
 # Executables
 *.exe
