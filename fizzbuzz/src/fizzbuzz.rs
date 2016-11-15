@@ -1,15 +1,17 @@
 pub fn fizzbuzz(input: i32) -> String { 
     let mut value: String = "1".to_string();
-    if input==2 {
-        value = input.to_string();
-    } else if input==3 {
+
+    if input !=3 && input !=5 {
+        value=input.to_string(); 
+        return value;
+    }
+    if input==3 {
         value = "fizz".to_string();
-     } else if input==4 {
-        value = input.to_string();
      } else if input==5 {
         value = "buzz".to_string();
      }
-    value
+
+    return value;
 }
 
 
