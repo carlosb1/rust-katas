@@ -15,6 +15,10 @@ impl Grid  {
 
 
     }
+    fn index(&self, col: i32, row: i32) -> usize {
+        return ((row*self.width)+col) as usize;
+    }
+
     fn cycle(&mut self) {
         //TODO NOT WORK!!!
         if (self.num_cells == 1) {
@@ -22,38 +26,19 @@ impl Grid  {
             self.num_cells = 0;
             return;
         }
-        let mut row = 0;
-        let mut col = 0;
+        let row = 0;
+        let col = 0;
 
-        let mut cell_posic = ((row*self.width)+col) as usize;
-        
-        row = 0;
-        col = 1;
-        let mut posic_neigh = ((row*self.width)+col) as usize;
-        
-        if (self.cells[posic_neigh]==0) {
-              self.cells[cell_posic] = 0;
-              self.num_cells = 0;
-              return;
+        let cell_posic = self.index(col,row);
+       
+        for index_col in 0..self.height {
+            for index_row in 0..self.width {
+                let  posic_neight = self.index(index_col,index_row);
+                if (self.cells[posic_neight]==0) {
+                    self.cells[cell_posic]=0;
+                }
+            }
         }
-    
-        row = 1;
-        col = 1;
-        posic_neigh = ((row*self.width)+col) as usize;
-        if (self.cells[posic_neigh]==0) { 
-              self.cells[cell_posic] = 0;
-              self.num_cells = 0;
-              return;
-        }
-        row = 1;
-        col = 0;
-        posic_neigh = ((row*self.width)+col) as usize;
-        if (self.cells[posic_neigh]==0) { 
-              self.cells[cell_posic] = 0;
-              self.num_cells = 0;
-              return;
-        }
-
     }
     fn new (width: i32, height: i32) -> Grid{
         return Grid {width: width, height: height, num_cells: 0, cells: vec![0;(width * height) as usize]};
