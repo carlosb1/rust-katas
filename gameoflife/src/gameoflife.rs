@@ -36,86 +36,27 @@ impl Grid  {
         let prev_row = (row - 1);
         let next_col = (col + 1);
         let prev_col = (col - 1);
-
-        /*
-        prev_col, prev_row
-        col, prev_row,
-        next_col, prev_row
-        */
+        let mut neighbours = Vec::new();
+        neighbours.push((prev_col,prev_row));
+        neighbours.push((col,prev_row));
+        neighbours.push((next_col,prev_row));
+        neighbours.push((prev_col,row));
+        neighbours.push((next_col,row));
+        
+        neighbours.push((prev_col,next_row));
+        neighbours.push((col,next_row));
+        neighbours.push((next_col,next_row));
 
         let mut num_neighbours = 0;
-        //TODO Apply refactor. for this case
-        if (prev_col >=0 && prev_row>=0)  {
-            let cell_posic = self.index(prev_col,prev_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
+        for &(neigh_col,neigh_row) in neighbours.iter() {
+            if (neigh_col>=0 && neigh_col<self.width && neigh_row>=0 && neigh_row <self.height) {
+                let cell_posic = self.index(neigh_col,neigh_row);
+                if (self.cells[cell_posic] ==1) {
+                     num_neighbours+=1;
+                }
             }
         }
 
-        if (col >=0 && prev_row>=0) {
-            let cell_posic = self.index(col,prev_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-        if (next_col <self.width && prev_row>=0) {
-            let cell_posic = self.index(next_col,prev_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-
-        /*
-        prev_col,row
-        next_col,row
-        */
-
-        if (prev_col >=0 && row>=0) {
-            let cell_posic = self.index(prev_col,row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-        if (next_col < self.width && row>=0) {
-            let cell_posic = self.index(next_col,row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-
-
-        /*
-        prev_col, next_row
-        col, next_row
-        next_col, next_row
-        */
-
-        if (prev_col >=0 && next_row<self.height) {
-            let cell_posic = self.index(prev_col,next_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-        if (col >=0 && next_row<self.height) {
-            let cell_posic = self.index(col,next_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
-
-
-
-        if (next_col <self.width && next_row<self.height) {
-            let cell_posic = self.index(next_col,next_row);
-            if (self.cells[cell_posic] ==1) {
-                num_neighbours+=1;
-            }
-        }
 
         if (num_neighbours >=2 && num_neighbours<=3) {
             self.num_cells=1;
