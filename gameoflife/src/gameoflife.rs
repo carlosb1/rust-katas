@@ -6,6 +6,9 @@ struct Grid {
 }
 
 impl Grid  {
+    fn new (width: i32, height: i32) -> Grid{
+        return Grid {width: width, height: height, num_cells: 0, cells: vec![0;(width * height) as usize]};
+    }
     fn cells(&self) -> i32 { return self.num_cells}
     fn born(&mut self, col: i32, row: i32) { 
         //TODO refactor this num_cells    
@@ -69,9 +72,6 @@ impl Grid  {
             }
         }
         
-    }
-    fn new (width: i32, height: i32) -> Grid{
-        return Grid {width: width, height: height, num_cells: 0, cells: vec![0;(width * height) as usize]};
     }
 }
 
