@@ -18,48 +18,50 @@ impl Grid  {
     fn index(&self, col: i32, row: i32) -> usize {
         return ((row*self.width)+col) as usize;
     }
+    fn pos(&self, index: i32) -> (i32,i32) {
+            let row = index % self.width;
+            let col = index - (row*self.width);
+            return (col,row);
+    }
 
     fn cycle(&mut self) {
-        //TODO NOT WORK!!!
         if (self.cells.len() == 1) {
             self.cells[0] = 0;
             self.num_cells = 0;
             return;
         }
 
-        self.cells[0] = 0;
         self.num_cells = 0;
 
-        let row = 0;
-        let col = 0;
-        let next_row = (row + 1);
-        let prev_row = (row - 1);
-        let next_col = (col + 1);
-        let prev_col = (col - 1);
-        let mut neighbours = Vec::new();
-        neighbours.push((prev_col,prev_row));
-        neighbours.push((col,prev_row));
-        neighbours.push((next_col,prev_row));
-        neighbours.push((prev_col,row));
-        neighbours.push((next_col,row));
-        
-        neighbours.push((prev_col,next_row));
-        neighbours.push((col,next_row));
-        neighbours.push((next_col,next_row));
-
-        let mut num_neighbours = 0;
-        for &(neigh_col,neigh_row) in neighbours.iter() {
-            if (neigh_col>=0 && neigh_col<self.width && neigh_row>=0 && neigh_row <self.height) {
-                let cell_posic = self.index(neigh_col,neigh_row);
-                if (self.cells[cell_posic] ==1) {
-                     num_neighbours+=1;
-                }
+        for index in 0..self.cells.len() as i32 {
+            let (col, row) = self.pos(index);
+            let next_row = (row + 1);
+            let prev_row = (row - 1);
+            let next_col = (col + 1);
+            let prev_col = (col - 1);
+            let mut neighbours = Vec::new();
+            neighbours.push((prev_col,prev_row));
+            neighbours.push((col,prev_row));
+	        neighbours.push((next_col,prev_row));
+	        neighbours.push((prev_col,row));
+	        neighbours.push((next_col,row));
+	        neighbours.push((prev_col,next_row));
+	        neighbours.push((col,next_row));
+	        neighbours.push((next_col,next_row));
+	
+	        let mut num_neighbours = 0;
+	        for &(neigh_col,neigh_row) in neighbours.iter() {
+	            if (neigh_col>=0 && neigh_col<self.width && neigh_row>=0 && neigh_row <self.height) {
+	                let cell_posic = self.index(neigh_col,neigh_row);
+	                if (self.cells[cell_posic] ==1) {
+	                     num_neighbours+=1;
+	                }
+	            }
+	        }
+	
+	        if (num_neighbours >=2 && num_neighbours<=3) {
+	            self.num_cells+=1;
             }
-        }
-
-
-        if (num_neighbours >=2 && num_neighbours<=3) {
-            self.num_cells=1;
         }
         
     }
@@ -101,7 +103,7 @@ fn cell_should_survive_dead_one_cycle_in_grid_length_two() {
    [*][ ]
  */
 #[test]
-fn three_cells_live_in_grid_when_a_cycle_then_three_live) {
+fn three_cells_live_in_grid_when_a_cycle_then_three_live() {
     let mut grid = Grid::new(2,2); 
     grid.born(0,0);
     grid.born(0,1);
