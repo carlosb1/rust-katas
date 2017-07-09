@@ -30,21 +30,97 @@ impl Grid  {
         self.cells[0] = 0;
         self.num_cells = 0;
 
-        /*
         let row = 0;
         let col = 0;
+        let next_row = (row + 1);
+        let prev_row = (row - 1);
+        let next_col = (col + 1);
+        let prev_col = (col - 1);
 
-        let cell_posic = self.index(col,row);
-       
-        for index_col in 0..self.height {
-            for index_row in 0..self.width {
-                let  posic_neight = self.index(index_col,index_row);
-                if (self.cells[posic_neight]==0) {
-                    self.cells[cell_posic]=0;
-                }
+        /*
+        prev_col, prev_row
+        col, prev_row,
+        next_col, prev_row
+        */
+
+        let mut num_neighbours = 0;
+        //TODO Apply refactor. for this case
+        if (prev_col >=0 && prev_row>=0)  {
+            let cell_posic = self.index(prev_col,prev_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
             }
         }
+
+        if (col >=0 && prev_row>=0) {
+            let cell_posic = self.index(col,prev_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+        if (next_col <self.width && prev_row>=0) {
+            let cell_posic = self.index(next_col,prev_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+
+        /*
+        prev_col,row
+        next_col,row
         */
+
+        if (prev_col >=0 && row>=0) {
+            let cell_posic = self.index(prev_col,row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+        if (next_col < self.width && row>=0) {
+            let cell_posic = self.index(next_col,row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+
+
+        /*
+        prev_col, next_row
+        col, next_row
+        next_col, next_row
+        */
+
+        if (prev_col >=0 && next_row<self.height) {
+            let cell_posic = self.index(prev_col,next_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+        if (col >=0 && next_row<self.height) {
+            let cell_posic = self.index(col,next_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+
+
+        if (next_col <self.width && next_row<self.height) {
+            let cell_posic = self.index(next_col,next_row);
+            if (self.cells[cell_posic] ==1) {
+                num_neighbours+=1;
+            }
+        }
+
+        if (num_neighbours >=2 && num_neighbours<=3) {
+            self.num_cells=1;
+        }
+        
     }
     fn new (width: i32, height: i32) -> Grid{
         return Grid {width: width, height: height, num_cells: 0, cells: vec![0;(width * height) as usize]};
@@ -81,13 +157,14 @@ fn cell_should_survive_dead_one_cycle_in_grid_length_two() {
 
 /*
    [*][*]
-   [ ][ ]
+   [*][ ]
  */
-//#[test]
-fn two_cells_should_survive_dead_one_cycle_in_grid_length_two() {
+#[test]
+fn three_cells_live_in_grid_when_a_cycle_then_one_live() {
     let mut grid = Grid::new(2,2); 
     grid.born(0,0);
     grid.born(0,1);
+    grid.born(1,0);
     grid.cycle();
-    assert_eq!(grid.cells(),0);
+    assert_eq!(grid.cells(),1);
 }
