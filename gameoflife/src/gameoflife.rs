@@ -90,7 +90,6 @@ fn cell_should_dead_after_one_cycle_in_grid_length_one() {
     grid.cycle();
     assert_eq!(grid.cells(),0);
 }
-//TODO test multiple cells
 /*
    [*][ ]
    [ ][ ]
@@ -150,6 +149,22 @@ fn five_cells_live_in_grid_when_a_cycle_then_four_live() {
     grid.cycle();
     assert_eq!(grid.cells(),3);
 }
+
+/*
+   [*][ ][ ]
+   [ ][ ][ ]
+   [*][ ][ ]
+*/
+
+#[test]
+fn two_cells_live_separated_in_grid_when_a_cycle_all_dead() {
+    let mut grid = Grid::new(3,3); 
+    grid.born(0,0);
+    grid.born(0,2);
+    grid.cycle();
+    assert_eq!(grid.cells(),0);
+}
+
 
 
 
