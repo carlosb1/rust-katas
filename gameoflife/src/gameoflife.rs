@@ -101,11 +101,13 @@ fn cell_should_survive_dead_one_cycle_in_grid_length_two() {
    [*][ ]
  */
 #[test]
-fn three_cells_live_in_grid_when_a_cycle_then_one_live() {
+fn three_cells_live_in_grid_when_a_cycle_then_three_live) {
     let mut grid = Grid::new(2,2); 
     grid.born(0,0);
     grid.born(0,1);
     grid.born(1,0);
     grid.cycle();
-    assert_eq!(grid.cells(),1);
+    assert_eq!(grid.cells(),3);
 }
+
+
