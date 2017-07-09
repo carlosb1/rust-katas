@@ -21,11 +21,16 @@ impl Grid  {
 
     fn cycle(&mut self) {
         //TODO NOT WORK!!!
-        if (self.num_cells == 1) {
+        if (self.cells.len() == 1) {
             self.cells[0] = 0;
             self.num_cells = 0;
             return;
         }
+
+        self.cells[0] = 0;
+        self.num_cells = 0;
+
+        /*
         let row = 0;
         let col = 0;
 
@@ -39,6 +44,7 @@ impl Grid  {
                 }
             }
         }
+        */
     }
     fn new (width: i32, height: i32) -> Grid{
         return Grid {width: width, height: height, num_cells: 0, cells: vec![0;(width * height) as usize]};
@@ -61,10 +67,27 @@ fn cell_should_dead_after_one_cycle_in_grid_length_one() {
     assert_eq!(grid.cells(),0);
 }
 //TODO test multiple cells
+/*
+   [*][ ]
+   [ ][ ]
+ */
 #[test]
 fn cell_should_survive_dead_one_cycle_in_grid_length_two() {
     let mut grid = Grid::new(2,2); 
     grid.born(0,0);
+    grid.cycle();
+    assert_eq!(grid.cells(),0);
+}
+
+/*
+   [*][*]
+   [ ][ ]
+ */
+//#[test]
+fn two_cells_should_survive_dead_one_cycle_in_grid_length_two() {
+    let mut grid = Grid::new(2,2); 
+    grid.born(0,0);
+    grid.born(0,1);
     grid.cycle();
     assert_eq!(grid.cells(),0);
 }
