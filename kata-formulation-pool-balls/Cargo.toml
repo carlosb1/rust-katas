@@ -1,0 +1,9 @@
+[package]
+name = "kata-formulation-pool-balls"
+version = "0.1.0"
+authors = ["Carlos B <carlos.baezruiz@gmail.com>"]
+
+[[bin]]
+name="kata_poolballs"
+
+[dependencies]
