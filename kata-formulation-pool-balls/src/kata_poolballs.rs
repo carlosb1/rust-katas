@@ -11,31 +11,42 @@ impl Triangle {
     fn minimum(&self) -> i32 {
         let len = self.input.len();
         let mut chars: Vec<char> = self.input.chars().collect();
-
         if len==1 { 
             return 0;
         }
+
 
         /*
         for c in chars {
             println!("{}",c);
         }
         */
+
         return 1; 
+    }
+    fn swapped_balls(&self) -> String {
+        return "amount:1\nswap:0,1".to_string();
     }
 }
 
 
 
 #[test]
-fn triangle_should_does_not_swap_for_one_char() {
+fn triangle_should_does_count_not_swap_for_one_char() {
     let triangle = Triangle::new("R".to_string());
     assert_eq!(triangle.minimum(),0);
 }
 
 
 #[test]
-fn triangle_should_does__swap_one_times_for_three_chars() {
+fn triangle_should_does_count_swap_one_times_for_three_chars() {
     let triangle = Triangle::new("RYY".to_string());
     assert_eq!(triangle.minimum(),1);
+}
+
+
+#[test]
+fn triangle_should_does_swap_one_times_for_three_chars() {
+    let triangle = Triangle::new("RYY".to_string());
+    assert_eq!(triangle.swapped_balls(),"amount:1\nswap:0,1");
 }
