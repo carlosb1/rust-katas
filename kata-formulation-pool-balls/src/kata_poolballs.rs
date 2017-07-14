@@ -29,7 +29,6 @@ impl Triangle {
 
 #[test]
 fn triangle_should_does_not_swap_for_one_char() {
-    println!("hello world");
     let triangle = Triangle::new("R".to_string());
     assert_eq!(triangle.minimum(),0);
 }
@@ -37,7 +36,6 @@ fn triangle_should_does_not_swap_for_one_char() {
 
 #[test]
 fn triangle_should_does__swap_one_times_for_three_chars() {
-    println!("hello world");
     let triangle = Triangle::new("RYY".to_string());
     assert_eq!(triangle.minimum(),1);
 }
