@@ -1,5 +1,5 @@
 struct Triangle {
-    input: String
+   input: String
 }
 
 
@@ -10,19 +10,20 @@ impl Triangle {
     }
     fn minimum(&self) -> i32 {
         let len = self.input.len();
-        let characters = self.input.chars();
+        let mut chars: Vec<char> = self.input.chars().collect();
 
-
-        for c in characters {
-            println!("{}",c);
-            println!("{}",c[0]);
+        if len==1 { 
+            return 0;
         }
 
-        return 0; 
-
+        /*
+        for c in chars {
+            println!("{}",c);
+        }
+        */
+        return 1; 
     }
 }
-
 
 
 
