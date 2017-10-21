@@ -1,7 +1,10 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+pub struct Potter {
+            
     }
-}
+
+    impl Potter  {
+        pub fn new() -> Potter {
+         return Potter {};
+        }
+
+    }
