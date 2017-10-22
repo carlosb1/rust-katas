@@ -16,17 +16,21 @@ impl Potter  {
         self.books.push(new_book);
     }
 
+    fn is_last(&self, index: i32) -> bool{
+        let number_books = self.books.len() as i32;
+        return index >= (number_books - 1);
+    }
 
     pub fn checkout(&mut self) -> f32  {
 
         let number_books = self.books.len() as i32;
        
-
         let mut different = false;
         for index in 0..number_books {
-                if index >= (number_books - 1) {
+                if self.is_last(index) {
                     break;
                 }
+                
                 let mut books_to_find = self.books.split_off((index as usize)+1);
                 if ! books_to_find.contains(&self.books[index as usize]) {
                     different = true;
