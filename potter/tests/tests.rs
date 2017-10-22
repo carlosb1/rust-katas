@@ -5,7 +5,7 @@ use potter::Potter;
 
 #[test]
 fn should_be_created_empty()  {
-    let pot = Potter::new();
+    let mut pot = Potter::new();
     let total = pot.checkout();
 
     assert_eq!(total,0.0);
