@@ -1,1 +1,7 @@
 target
+*.swp
+.swp
+/*/*.swp
+*.swo
+.swo
+/*/*.swo

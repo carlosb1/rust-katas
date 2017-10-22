@@ -1,10 +1,13 @@
 extern crate potter;
 
 use potter::Potter;
+use std::string::String;
 
 #[test]
-fn it_works() {
-    let potter = Potter::new();
-    assert_eq!(2 + 2, 4);
+fn should_be_created_empty()  {
+    let pot = Potter::new();
+    let total = pot.checkout();
+
+    assert_eq!(total,0);
 }
 
