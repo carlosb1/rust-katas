@@ -14,7 +14,7 @@ fn should_be_created_empty()  {
 #[test]
 fn should_add_two_same_books()  {
     let mut pot = Potter::new();
-    let book = "book1".to_string();
+    let  book = "book1".to_string();
     //TODO refactor to move this to_string, should it be static?
     pot.add(book.clone());
     pot.add(book.clone());
@@ -26,8 +26,8 @@ fn should_add_two_same_books()  {
 #[test]
 fn should_add_different_books()  {
     let mut pot = Potter::new();
-    let book = "book1".to_string();
-    let book2 = "book2".to_string();
+    let  book = "book1".to_string();
+    let  book2 = "book2".to_string();
     pot.add(book.clone());
     pot.add(book2.clone());
     

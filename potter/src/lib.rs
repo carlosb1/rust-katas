@@ -17,7 +17,7 @@ impl Potter  {
     }
 
 
-    pub fn checkout(&self) -> f32  {
+    pub fn checkout(&mut self) -> f32  {
 
         let number_books = self.books.len() as i32;
        
@@ -27,14 +27,8 @@ impl Potter  {
                 if index >= (number_books - 1) {
                     break;
                 }
-                let mut found = false;
-                for second_index_book in  (index+1).. number_books {
-                    if (self.books[index as usize] == self.books[second_index_book as usize]) {     
-                        found = true;
-                        break;
-                    }
-                }
-                if !found {
+                let mut books_to_find = self.books.split_off((index as usize)+1);
+                if ! books_to_find.contains(&self.books[index as usize]) {
                     different = true;
                     break;
                 }
