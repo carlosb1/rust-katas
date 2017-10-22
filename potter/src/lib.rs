@@ -18,10 +18,7 @@ impl Potter  {
 
     pub fn checkout(&self) -> i32  {
 
-        let number_books = self.books.len();
-        if number_books == 1 {
-            return 8;
-        }
-        return 0;
+        let number_books = self.books.len() as i32;
+        return (number_books * 8);
     }
 }
